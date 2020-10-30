@@ -1,0 +1,165 @@
+{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://schema.opencerta.org/proof",
+    "https://schema.opencerta.org/fhir/202009"
+  ],
+  "type": [
+    "VerifiableCredential",
+    "FHIRCredential"
+  ],
+  "credentialSubject": {
+    "type": "FHIRCredential",
+    "givenName": "Lab A",
+    "familyName": "Patient",
+    "fhirVersion": "3.5a.0",
+    "fhirSource": {
+      "contained": [
+        {
+          "id": "8932748723984",
+          "name": "Test Facility A",
+          "resourceType": "Organization"
+        },
+        {
+          "id": "23980293840932",
+          "name": {
+            "family": [
+              "Tech"
+            ],
+            "given": [
+              "Lab"
+            ]
+          },
+          "resourceType": "Practitioner"
+        }
+      ],
+      "category": {
+        "coding": [
+          {
+            "code": "laboratory",
+            "system": "http://hl7.org/fhir/observation-category"
+          }
+        ]
+      },
+      "code": {
+        "coding": [
+          {
+            "code": "94500-6",
+            "display": "SARS-COV-2, NAA",
+            "system": "http://loinc.org"
+          }
+        ]
+      },
+      "effectiveDateTime": "2020-07-14T23:10:45-06:00",
+      "interpretation": {
+        "coding": [
+          {
+            "code": "N",
+            "system": "http://hl7.org/fhir/v2/0078"
+          }
+        ]
+      },
+      "issued": "2020-07-14T23:10:45-06:00",
+      "method": {
+        "coding": [
+          {
+            "extension": [
+              {
+                "url": "http://commonpass.org/fhir/StructureDefinition/test-identifier",
+                "valueString": "0123456789"
+              }
+            ],
+            "code": "TBD",
+            "system": "http://commonpass.org/fhir/StructureDefinition/test-manufacturer-model"
+          }
+        ]
+      },
+      "performer": [
+        {
+          "display": "Test Facility A",
+          "reference": "#8932748723984"
+        },
+        {
+          "display": "Lab Tech",
+          "reference": "#23980293840932"
+        }
+      ],
+      "status": "final",
+      "subject": {
+        "extension": [
+          {
+            "extension": [
+              {
+                "url": "http://commonpass.org/fhir/StructureDefinition/subject-name-info",
+                "valueHumanName": {
+                  "family": [
+                    "Patient"
+                  ],
+                  "given": [
+                    "Lab A"
+                  ]
+                }
+              },
+              {
+                "url": "http://commonpass.org/fhir/StructureDefinition/subject-identifier-info",
+                "valueIdentifier": {
+                  "assigner": {
+                    "display": "United States of America"
+                  },
+                  "period": {
+                    "end": "2024-12-04"
+                  },
+                  "type": {
+                    "coding": [
+                      {
+                        "code": "PPN",
+                        "display": "Passport Number",
+                        "system": "http://hl7.org/fhir/v2/0203"
+                      }
+                    ]
+                  },
+                  "value": "12345678-90"
+                }
+              },
+              {
+                "url": "http://commonpass.org/fhir/StructureDefinition/subject-identifier-info",
+                "valueIdentifier": {
+                  "assigner": {
+                    "display": "UK"
+                  },
+                  "period": {
+                    "end": "2023-01-14"
+                  },
+                  "type": {
+                    "coding": [
+                      {
+                        "code": "PPN",
+                        "display": "Passport Number",
+                        "system": "http://hl7.org/fhir/v2/0203"
+                      }
+                    ]
+                  },
+                  "value": "9872349875987"
+                }
+              }
+            ],
+            "url": "http://commonpass.org/fhir/StructureDefinition/subject-info"
+          }
+        ],
+        "display": "Lab A Patient",
+        "reference": "Patient/566089"
+      },
+      "valueString": "Indeterminate",
+      "resourceType": "Observation"
+    }
+  },
+  "issuanceDate": "2020-10-20T00:29:19.940Z",
+  "issuer": "https://issuers.opencerta.org/6adc3c2b2c5b0928d8d86793395b5f0e171de8/96a78b6dd92767ef127dbd98f505aa1186ed5c97",
+  "proof": {
+    "type": "RsaSignature2018",
+    "created": "2020-10-20T00:29:20Z",
+    "jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..IdHu6-XQI9JIs9eVhFgyIqqB2j8xGB97LXVmG_VUEOdgOOov80vi-GgCLatoYwsUT-d2kLaGg7qyU5JaWJeONLKdSDIyi6vCvQffRPMtlKW01gc9IbbBnvLi6SC9iol8yQCqLAu874o_bE0i7znRZ-cNR330I5GzJi5gpLQ71TdAYvTsq4GCpAkNbLkeJoht51vY2uEn5dNOhE3GJAxRa5cSGvH7U3oozDZikCMLIELJeU8YyWXW4bZQLGiHfQ2IKbFhz_m1NTtIRIhzlAE4c-LYVQoRbtIA_j2j5cD4SwNUQKQaVzXUzlv1_EAip-9goXPjsDM3Ti4rYnyJpcnA5w",
+    "proofPurpose": "assertionMethod",
+    "verificationMethod": "https://issuers.opencerta.org/6adc3c2b2c5b0928d8d86793395b5f0e171de8/96a78b6dd92767ef127dbd98f505aa1186ed5c97"
+  }
+}

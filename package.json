@@ -43,7 +43,8 @@
   },
   "dependencies": {
     "@bitauth/libauth": "^1.17.1",
-    "compressjs": "^1.0.3"
+    "compressjs": "^1.0.3",
+    "json-canonicalize": "^1.0.3"
   },
   "devDependencies": {
     "@ava/typescript": "^1.1.1",

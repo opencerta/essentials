@@ -3499,6 +3499,11 @@ json-buffer@3.0.0:
   resolved "https://registry.yarnpkg.com/json-buffer/-/json-buffer-3.0.0.tgz#5b1f397afc75d677bde8bcfc0e47e1f9a3d9a898"
   integrity sha1-Wx85evx11ne96Lz8Dkfh+aPZqJg=
 
+json-canonicalize@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/json-canonicalize/-/json-canonicalize-1.0.3.tgz#94a76709ee27ac37170a8e6ff365f97c75173994"
+  integrity sha512-JNaq0PrhBpxVsNQRieYbJRlqH+3umxMOdI5c8t4C7XZZUBIuYE8gVRaPO6t1zgbO6t0aI0+hhQACfxG0WrI7jw==
+
 json-parse-better-errors@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/json-parse-better-errors/-/json-parse-better-errors-1.0.2.tgz#bb867cfb3450e69107c131d1c514bab3dc8bcaa9"
