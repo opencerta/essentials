@@ -36,6 +36,7 @@ export class CompressionStrategyRegistry {
 
   public getStrategy(algorithm: number): CompressionStrategy {
     if (this.registry.has(algorithm)) {
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       return this.registry.get(algorithm)!;
     }
     throw new Error(`unknown algorithm id: ${algorithm}`);
