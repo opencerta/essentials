@@ -12,6 +12,9 @@ const text: Uint8Array = new TextEncoder().encode(
 );
 const registry: CompressionStrategyRegistry = new CompressionStrategyRegistry();
 
+/**
+ * Test all registered compression algorithms
+ */
 Object.keys(CompressionAlgorithm)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   .filter((key: any) => isNaN(Number(CompressionAlgorithm[key])))
@@ -27,3 +30,10 @@ Object.keys(CompressionAlgorithm)
       t.deepEqual(decompressed, text);
     });
   });
+
+/**
+ * Test for unknown algorithm IDs
+ */
+test(`retrieve 'unknown' compression strategy`, async (t) => {
+  t.throws(() => registry.getStrategy(100));
+});
