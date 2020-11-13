@@ -3908,6 +3908,11 @@ merge@^1.2.1:
   resolved "https://registry.yarnpkg.com/merge/-/merge-1.2.1.tgz#38bebf80c3220a8a487b6fcfb3941bb11720c145"
   integrity sha512-VjFo4P5Whtj4vsLzsYBu5ayHhoHJ0UqNm7ibvShmbmoz7tGi0vXaoJbGdB+GmDMLUdg8DpQXEIeVDAe8MaABvQ==
 
+messagepack@^1.1.12:
+  version "1.1.12"
+  resolved "https://registry.yarnpkg.com/messagepack/-/messagepack-1.1.12.tgz#64284d4c8f325582a8b0dafbdb2e550f01d9dcf6"
+  integrity sha512-pNB6K4q4VMLRXdvlGZkTtQhmKFntvLisnOQnL0VhKpZooL8B8Wsv5TXuidIJil0bCH6V172p3+Onfyow0usPYQ==
+
 micromatch@^3.0.4:
   version "3.1.10"
   resolved "https://registry.yarnpkg.com/micromatch/-/micromatch-3.1.10.tgz#70859bc95c9840952f359a068a3fc49f9ecfac23"

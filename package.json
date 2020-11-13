@@ -5,7 +5,7 @@
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",
   "module": "build/module/index.js",
-  "repository": "https://github.com/ramtorr/@opencerta/essentials",
+  "repository": "https://github.com/opencerta/essentials",
   "license": "LGPL-3.0-or-later",
   "keywords": [],
   "scripts": {
@@ -44,7 +44,8 @@
   "dependencies": {
     "@bitauth/libauth": "^1.17.1",
     "compressjs": "^1.0.3",
-    "json-canonicalize": "^1.0.3"
+    "json-canonicalize": "^1.0.3",
+    "messagepack": "^1.1.12"
   },
   "devDependencies": {
     "@ava/typescript": "^1.1.1",

@@ -15,18 +15,11 @@
 // License along with this library; if not, write to the Free Software
 // Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
-import {
-  brotliCompressSync,
-  brotliDecompressSync,
-  constants,
-  deflateSync,
-  gunzipSync,
-  gzipSync,
-  inflateSync,
-} from 'zlib';
+import { brotliCompressSync, brotliDecompressSync, constants, deflateSync, gunzipSync, gzipSync, inflateSync } from 'zlib';
 
 // cSpell:ignore brotli, bwtc, bzip, compressjs, lzp3
 import { BWTC, Bzip2, Lzp3 } from 'compressjs';
+import { decode, encode } from 'messagepack';
 
 export enum CompressionAlgorithm {
   identity,
@@ -36,6 +29,7 @@ export enum CompressionAlgorithm {
   brotli,
   bwtc,
   lzp3,
+  messagepack,
 }
 
 export class CompressionStrategyRegistry {
@@ -43,25 +37,14 @@ export class CompressionStrategyRegistry {
 
   constructor() {
     this.registry = new Map<number, CompressionStrategy>();
-    this.registry.set(
-      CompressionAlgorithm.identity,
-      new IdentityCompressionStrategy()
-    );
-    this.registry.set(
-      CompressionAlgorithm.brotli,
-      new BrotliCompressionStrategy()
-    );
+    this.registry.set(CompressionAlgorithm.identity, new IdentityCompressionStrategy());
+    this.registry.set(CompressionAlgorithm.brotli, new BrotliCompressionStrategy());
     this.registry.set(CompressionAlgorithm.bwtc, new BwtcCompressionStrategy());
-    this.registry.set(
-      CompressionAlgorithm.bzip2,
-      new Bzip2CompressionStrategy()
-    );
-    this.registry.set(
-      CompressionAlgorithm.deflate,
-      new DeflateCompressionStrategy()
-    );
+    this.registry.set(CompressionAlgorithm.bzip2, new Bzip2CompressionStrategy());
+    this.registry.set(CompressionAlgorithm.deflate, new DeflateCompressionStrategy());
     this.registry.set(CompressionAlgorithm.gzip, new GzipCompressionStrategy());
     this.registry.set(CompressionAlgorithm.lzp3, new Lzp3CompressionStrategy());
+    this.registry.set(CompressionAlgorithm.messagepack, new MessagePackCompressionStrategy());
   }
 
   public getStrategy(algorithm: number): CompressionStrategy {
@@ -164,5 +147,41 @@ class Lzp3CompressionStrategy implements CompressionStrategy {
 
   public decompress(payload: Uint8Array): Uint8Array {
     return Lzp3.decompressFile(payload);
+  }
+}
+
+class MessagePackCompressionStrategy implements CompressionStrategy {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private encoder: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private decoder: any;
+
+  constructor() {
+    const match = process.version.match(/^v(\d+)\.(\d+)/);
+    if (match && match[1] === '10') {
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      this.encoder = new (require('util').TextEncoder)('utf-8');
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
+      this.decoder = new (require('util').TextDecoder)('utf-8');
+    } else {
+      this.encoder = new TextEncoder();
+      this.decoder = new TextDecoder();
+    }
+  }
+
+  public compress(payload: Uint8Array): Uint8Array {
+    try {
+      return encode(JSON.parse(this.decoder.decode(payload))); // serialize JSON document
+    } catch (err) {
+      return encode(payload); // serialize as a binary payload
+    }
+  }
+
+  public decompress(payload: Uint8Array): Uint8Array {
+    const data = payload[0];
+    if ((data >= 0x80 && data <= 0x8f) || data == 0xde || data == 0xdf) {
+      return this.encoder.encode(JSON.stringify(decode(payload))); // JSON document
+    }
+    return new Uint8Array(decode(payload)); // binary payload
   }
 }

@@ -23,7 +23,8 @@
     "typedoc",
     "untracked",
     "certa",
-    "opencerta"
+    "opencerta",
+    "messagepack"
   ],
   "flagWords": [],
   "ignorePaths": [
