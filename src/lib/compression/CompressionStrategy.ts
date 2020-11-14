@@ -151,23 +151,8 @@ class Lzp3CompressionStrategy implements CompressionStrategy {
 }
 
 class MessagePackCompressionStrategy implements CompressionStrategy {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private encoder: any;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private decoder: any;
-
-  constructor() {
-    const match = process.version.match(/^v(\d+)\.(\d+)/);
-    if (match && match[1] === '10') {
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      this.encoder = new (require('util').TextEncoder)('utf-8');
-      // eslint-disable-next-line @typescript-eslint/no-var-requires
-      this.decoder = new (require('util').TextDecoder)('utf-8');
-    } else {
-      this.encoder = new TextEncoder();
-      this.decoder = new TextDecoder();
-    }
-  }
+  private encoder = new TextEncoder();
+  private decoder = new TextDecoder();
 
   public compress(payload: Uint8Array): Uint8Array {
     try {
